@@ -12,7 +12,7 @@ func TestTerraformHelloWorldExample(t *testing.T) {
 	// retryable errors in terraform testing.
 	terraformOptions := terraform.WithDefaultRetryableErrors(t, &terraform.Options{
 		// Set the path to the Terraform code that will be tested.
-		TerraformDir: "../infra",
+		TerraformDir: ".",
 	})
 
 	// Clean up resources with "terraform destroy" at the end of the test.
@@ -23,5 +23,5 @@ func TestTerraformHelloWorldExample(t *testing.T) {
 
 	// Run `terraform output` to get the values of output variables and check they have the expected values.
 	output := terraform.Output(t, terraformOptions, "name")
-	assert.Equal(t, "xyz", output)
+	assert.Equal(t, "rg-workload-prod-001-westus", output)
 }
