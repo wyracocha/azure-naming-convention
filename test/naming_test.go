@@ -22,6 +22,9 @@ func TestTerraformHelloWorldExample(t *testing.T) {
 	terraform.InitAndApply(t, terraformOptions)
 
 	// Run `terraform output` to get the values of output variables and check they have the expected values.
-	output := terraform.Output(t, terraformOptions, "name")
-	assert.Equal(t, "rg-workload-prod-001-westus", output)
+	globalOutput := terraform.Output(t, terraformOptions, "global")
+	kvOutput := terraform.Output(t, terraformOptions, "kv")
+	
+	assert.Equal(t, "rg-workload-prod-001-westus", globalOutput)
+	assert.Equal(t, "kvworkloadprod001westus", kvOutput)
 }
